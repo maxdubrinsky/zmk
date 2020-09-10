@@ -24,7 +24,7 @@ int zmk_display_init() {
     lv_obj_t *hello_world_label;
     lv_obj_t *count_label;
 
-    LOG_DBG("Display init");
+    LOG_DBG("");
 
     display = device_get_binding(ZMK_DISPLAY_NAME);
     if (display == NULL) {
@@ -32,19 +32,15 @@ int zmk_display_init() {
         return -EINVAL;
     }
 
-    display_set_orientation(display, DISPLAY_ORIENTATION_ROTATED_90);
-
-    LOG_DBG("Found a display device %s", display->name);
-
     screen = lv_obj_create(NULL, NULL);
     lv_scr_load(screen);
 
-    connection_label = lv_label_create(lv_scr_act(), NULL);
-    lv_label_set_text(connection_label, "ZMK v0.1.0");
-    lv_obj_align(connection_label, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
+    hello_world_label = lv_label_create(lv_scr_act(), NULL);
+    lv_label_set_text(hello_world_label, "ZMK v0.1.0");
+    lv_obj_align(hello_world_label, NULL, LV_ALIGN_CENTER, 0, 0);
     count_label = lv_label_create(lv_scr_act(), NULL);
     lv_label_set_text(count_label, CONFIG_ZMK_KEYBOARD_NAME);
-    lv_obj_align(count_label, NULL, LV_ALIGN_OUT_BOTTOM_MID, 0, 0);
+    lv_obj_align(count_label, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
     lv_task_handler();
     display_blanking_off(display);
 
